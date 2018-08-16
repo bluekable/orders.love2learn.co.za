@@ -1,0 +1,23 @@
+<div id="pavpopup_{{ id }}" data-id="{{ id }}" class="hide" data-time-close="{{ time_close }}" data-time-open="{{ time_open }}" data-text-close="{{ text_close_in }}" data-display="{{ display }}">
+  <div class="pavpopup-inner white-popup" style="position: relative; background: #FFF; padding: 20px;width: auto;max-width: {{ width  }}px; margin: 20px auto;">
+      <div class="popup-content-top">
+          {% if heading_title is not empty %}
+          <h3>{{ heading_title }}</h3>
+          {% endif %}
+          {% if html is not empty %}
+          <div class="popup-content">{{ html }}</div>
+          {% endif %}
+      </div>  
+      {% if module is not empty %}
+      <div class="popup-content-module">
+        {{ module }}
+      </div>
+      {% endif %}  
+      {% if display =='alway_show_close' %}
+       <a href="#" class="btn-close pull-right"><i class="fa fa-close"></i> {{ text_close_dont_show }}</a>
+      {% endif %}
+   </div> 
+</div>
+<script type="text/javascript"><!--
+$("#pavpopup_{{ id }}").pavoPopup().work();
+--></script>

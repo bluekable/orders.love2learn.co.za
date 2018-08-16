@@ -1,0 +1,17 @@
+<!-- Created using vQmod XML Generator by UKSB - http://uksb.github.com/vqgen/ //-->
+<modification>
+	<id><![CDATA[Edit order_add email text]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.6.2]]></vqmver>
+	<author><![CDATA[Shane Drower-Copley]]></author>
+		<file path="/catalog/language/en-gb/mail/" name="order_add.php">
+		<operation info="Change text displayed in email after client places and order">
+			<search position="replace"><![CDATA[$_['text_greeting']         = 'Thank you for your interest in %s products. Your order has been received and will be processed once payment has been confirmed.';]]></search>
+			<add><![CDATA[$_['text_greeting']         = '<p><b>Thank you for submitting your order!</b></p><p><b>Following please find a summary of your order, for your records.</b></p><p>Should you not receive a quotation from Love2Learn within 72 hours, your order may have been corrupted in transit; consequently, kindly contact our offices directly on +27 11 465 6049 to verify receipt - thank you!</p>';]]></add>
+		</operation>
+		<operation info="Change text displayed in email after client places and order">
+			<search position="replace"><![CDATA[$_['text_link']             = 'To view your order click on the link below:';]]></search>
+			<add><![CDATA[$_['text_link']             = 'To view your order online click on the link below:';]]></add>
+		</operation>
+	</file>
+</modification>

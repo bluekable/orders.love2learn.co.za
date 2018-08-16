@@ -1,0 +1,24 @@
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="one-third brand">
+        <img src="https://love2learn.co.za/stock/logopg.png" alt="Love2Learn" title="Love2Learn">
+        <p>{{powered}}</p>
+      </div>
+      <div class="one-third btn-top">
+        <a class="circle scrollToTop" href="#"><i class="fas fa-chevron-up"></i></a>
+      </div>
+      <div class="one-third login">
+        <p><a href="https://love2learn.co.za/stock/TermsAndConditions.pdf" class="tc-link" target="_blank">Terms &amp; Conditions</a><a class="circle" href="https://love2learn.co.za/user"><i class="fas fa-sign-in-alt"></i></a></p>
+      </div>
+    </div>  
+  </div>
+</footer>
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+<!--
+OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
+Please donate via PayPal to donate@opencart.com
+//-->
+</body></html>

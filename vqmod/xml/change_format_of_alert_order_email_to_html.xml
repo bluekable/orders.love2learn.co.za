@@ -1,0 +1,12 @@
+<modification>
+	<id><![CDATA[Edit order_alert email format to HTML]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.6.2]]></vqmver>
+	<author><![CDATA[Shane Drower-Copley]]></author>
+		<file path="/catalog/controller/mail/" name="order.php">
+		<operation info="Change format of alert email for orders from text to HTML">
+			<search position="replace"><![CDATA[$mail->setText($this->load->view('mail/order_alert', $data));]]></search>
+			<add><![CDATA[$mail->setHtml($this->load->view('mail/order_alert', $data));]]></add>
+		</operation>
+	</file>
+</modification>

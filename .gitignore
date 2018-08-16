@@ -1,0 +1,13 @@
+
+.vscode/
+vqgen/
+vqmod/checked.cache
+vqmod/mods.cache
+vqmod/vqcache/*
+vqmod/logs/*
+orders.love2learn.crt
+orders.love2learn.key
+php.ini
+config.php
+admin/config.php
+*.DS_Store

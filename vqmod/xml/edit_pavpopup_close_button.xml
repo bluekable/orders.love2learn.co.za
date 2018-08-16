@@ -1,0 +1,13 @@
+<!-- Created using vQmod XML Generator by UKSB - http://uksb.github.com/vqgen/ //-->
+<modification>
+	<id><![CDATA[Edit PavPop-Up Close Button]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.6.2]]></vqmver>
+	<author><![CDATA[Shane Drower-Copley]]></author>
+		<file path="/catalog/language/en-gb/extension/module/" name="pavpopup.php">
+		<operation info="Change text in close button on pavpopups">
+			<search position="replace"><![CDATA[	$_['text_close_dont_show'] = 'Close and don\'t show again!!!';]]></search>
+			<add><![CDATA[	$_['text_close_dont_show'] = 'I HAVE READ THIS';]]></add>
+		</operation>
+	</file>
+</modification>

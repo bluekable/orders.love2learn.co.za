@@ -1,0 +1,40 @@
+<!-- Created using vQmod XML Generator by UKSB - http://uksb.github.com/vqgen/ //-->
+<modification>
+	<id><![CDATA[3 Tier Collapsible Categories - alows for there to bee 3 levels of categories, the first two of which are colapsible.]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.6.2]]></vqmver>
+	<author><![CDATA[Shane Drower-Copley]]></author>
+	<file path="/catalog/controller/extension/module/" name="category.php">
+		<operation info="Remove condition that only fetches children categories of the currently open category and include a 2nd children value to the $children_data array">
+			<search position="replace" offset="11"><![CDATA[if ($category['category_id'] == $data['category_id']) {]]></search>
+			<add><![CDATA[$children = $this->model_catalog_category->getCategories($category['category_id']);
+
+				foreach($children as $child) {
+					$filter_data = array('filter_category_id' => $child['category_id'], 'filter_sub_category' => true);
+
+					$children_data[] = array(
+						'category_id' => $child['category_id'],
+						'name' => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
+						'second_children' => $second_children_data,
+						'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])
+					);]]></add>
+		</operation>
+		<operation info="Add functionality to fetch 2nd children categories">
+			<search position="after"><![CDATA[$filter_data = array('filter_category_id' => $child['category_id'], 'filter_sub_category' => true);]]></search>
+			<add><![CDATA[
+						$second_children_data = array();
+							$second_children = $this->model_catalog_category->getCategories($child['category_id']);
+
+							foreach($second_children as $second_child){
+								$second_child_filter_data = array('filter_category_id' => $second_child['category_id'], 'filter_sub_category' => true);
+								
+								$second_children_data[] = array(
+									'category_id' => $second_child['category_id'],
+									'name' => $second_child['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($second_child_filter_data) . ')' : ''),
+									'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'] . '_' . $second_child['category_id'])
+								);
+							}
+				]]></add>
+		</operation>
+	</file>
+</modification>

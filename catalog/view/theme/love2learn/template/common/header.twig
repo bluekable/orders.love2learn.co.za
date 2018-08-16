@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WW7CG3H');</script>
+  <!-- End Google Tag Manager -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{{ title }}</title>
+<base href="{{ base }}" />
+{% if description %}
+<meta name="description" content="{{ description }}" />
+{% endif %}
+{% if keywords %}
+<meta name="keywords" content="{{ keywords }}" />
+{% endif %}
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Economica:400,700" rel="stylesheet"> 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+<link href="catalog/view/theme/love2learn/stylesheet/stylesheet.css" rel="stylesheet">
+{% for style in styles %}
+<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+{% endfor %}
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+<script src="catalog/view/javascript/common.js" type="text/javascript"></script>
+{% for link in links %}
+<link href="{{ link.href }}" rel="{{ link.rel }}" />
+{% endfor %}
+{% for analytic in analytics %}
+{{ analytic }}
+{% endfor %}
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WW7CG3H"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div id="top-band"></div>
+<div id="scroll-text"><strong>"Used in over 20 Countries around the world"</strong> - A world class curriculum for every learner!</div>
+<nav id="top">
+  <div class="container">
+    <div class="one-third">
+      <div id="nav-logo">
+      <img src="catalog/view/theme/love2learn/image/l2l_logo.png">
+      </div>
+    </div>
+    <div class="two-thirds">
+      <div id="menu">
+        <ul>
+          <li><a href="https://love2learn.co.za"><br>Home</a></li>
+          <li><a href="https://love2learn.co.za/homeschooling-explained/overview">Homeschooling Explained</a></li>
+          <li><a href="https://love2learn.co.za/choose-your-subjects/overview">Choose Your Subjects</a></li>
+          <li><a href="https://orders.love2learn.co.za">Orders and Pricing</a></li>
+          <li><a href="https://blog.love2learn.co.za/"><br>Blog</a></li>
+          <li class="dropdown"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown"><br><span class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span> <span class="caret"></span></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              {% if logged %}
+              <li><a href="{{ account }}">{{ text_account }}</a></li>
+              <li><a href="{{ order }}">{{ text_order }}</a></li>
+              <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+              <li><a href="{{ download }}">{{ text_download }}</a></li>
+              <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+              {% else %}
+              <li><a href="{{ register }}">{{ text_register }}</a></li>
+              <li><a href="{{ login }}">{{ text_login }}</a></li>
+              {% endif %}
+            </ul>
+          </li>
+          <li><a href="https://love2learn.co.za/faq-category/scope"><br><i class="fa fa-info-circle"></i></a></li>
+          <li><a href="https://love2learn.co.za/testimonials"><br><i class="fa fa-comments"></i></a></li>
+          <li><a href="https://love2learn.co.za/contact-us"><br><i class="fa fa-envelope"></i></a></li>
+        </ul>
+      </div>
+    </div>  
+  </div>
+ <!--<div class="container">{{ currency }}
+    {{ language }}
+    <div id="top-links" class="nav pull-right">
+      <ul class="list-inline">
+        <li><a href="{{ contact }}"><i class="fa fa-phone"></i></a> <span class="hidden-xs hidden-sm hidden-md">{{ telephone }}</span></li>
+        <li class="dropdown"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span> <span class="caret"></span></a>
+          <ul class="dropdown-menu dropdown-menu-right">
+            {% if logged %}
+            <li><a href="{{ account }}">{{ text_account }}</a></li>
+            <li><a href="{{ order }}">{{ text_order }}</a></li>
+            <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
+            <li><a href="{{ download }}">{{ text_download }}</a></li>
+            <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+            {% else %}
+            <li><a href="{{ register }}">{{ text_register }}</a></li>
+            <li><a href="{{ login }}">{{ text_login }}</a></li>
+            {% endif %}
+          </ul>
+        </li>
+        <li><a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}"><i class="fa fa-heart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_wishlist }}</span></a></li>
+        <li><a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }}</span></a></li>
+        <li><a href="{{ checkout }}" title="{{ text_checkout }}"><i class="fa fa-share"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_checkout }}</span></a></li>
+      </ul>
+    </div>
+  </div>-->
+</nav>
+<header>
+  <div class="container">
+    <div class="row">
+    <!-- Order Info Modal Button -->
+      <div class="order-info col-sm-2"><a href="#orderInfo" role="button" class="btn" data-toggle="modal">How to order/Hoe om te bestel</a></div>
+      <div class="col-sm-3 pull-right">{{ cart }}</div>
+      <div class="col-sm-4 pull-right">{{ search }}</div>
+    </div>
+  </div>
+</header>
+
+<!-- Order Info Modal -->
+<div id="orderInfo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="orderInfoLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h2 id="orderInfoLabel">For Your Convenience You Can Order Your Love2Learn Curriculum Online!</h2>
+  </div>
+  <div class="modal-body">
+   <p><b>Please FIRST Read Through and Familiarise Yourself With ALL 7 
+          Steps Before Proceeding to the English and/or Afrikaans Online Order 
+          Form and Price List<br>
+          This is how the order process works:</b></p>
+<h3>Step 1:</h3>
+<p>Once you’ve read through these easy steps, click on “I have read this", below.</p>
+<h3>Step 2:</h3>
+<p>On the Online Order Form and Price List, all the Curriculum Levels are listed sequentially in the left hand margin.<br>
+Scroll down to through the Curriculum levels and add individual subjects 
+to your Shopping Trolley from our selection of Grade 1, 2, 3 etc. 
+DISCIPLINE STUDIES (Mathematics, English etc.), then scroll down further 
+and make your selection of either a CORE PACKAGE 3 – 5 Years, 4 – 6 
+Years etc. or CORE STUDIES 1, 2, 3 etc. (Bible and Character, History, 
+Geography etc.) based on the needs of your family. (For guidance in 
+regard to DISCIPLINE STUDIES, CORE PACKAGES and CORE STUDIES, refer "How  it Works”)<br>
+At any time you can click on “View Shopping Trolley” to determine a Cost Estimate for yourself.</p><p><b>PLEASE NOTE:</b> You are not required to order the full range of 
+subjects we offer in our DISCIPLINE STUDIES and CORE STUDIES (only our 
+CORE PACKAGES are indivisible), you are welcome to order as little as 
+one subject at a time.</p><h3>Step 3:</h3><p>Once you are satisfied with your selection of subjects and you have 
+double-checked against the Ordering Checklist (on the “View Shopping 
+Trolley” screen, kindly select your “Place of Delivery” from the 
+drop-down box at the top of the screen. Please note: once you’ve done 
+this, your Order Total will then include costs for “Fulfilment” 
+(Packaging, delivery to your selected “Place of Delivery” etc.); and you
+ will not be charged anything more for the delivery of your entire 
+order!</p><p><b>Please Note:</b> Only select a City or Town name if you actually 
+reside there. Love2Learn will quote you for delivery based on the City 
+or Town that you select. However, if you reside on a farm, small-holding
+ etc. outside of that City or Town, any additional costs incurred for 
+dedicated delivery to your place of residence (should this be needed) 
+will be for your account. Please be aware that deliveries of this nature
+ attract a significant premium from Courier companies; and we therefore 
+recommend that you rather nominate an address in the nearest City or 
+Town to which we can deliver. You can then in turn arrange to collect 
+from there at your convenience. If you are in any way uncertain as to 
+how to proceed, please do not hesitate to contact the Love2Learn office;
+ and we will endeavour to advise you with pleasure!</p><p>If you cannot find a "Place of Delivery" suitable to your needs, then
+ select "Other". Kindly note that if you select "Other", then Love2Learn
+ will only be in a position to quote you for delivery costs, once your 
+order is complete and ready for dispatch. Please note that deliveries to
+ areas not listed attract a significant premium.</p><p>International clients please note:<br>
+Love2Learn will only be able to quote you officially for courier 
+delivery once your order is complete, as we will then be able to 
+accurately determine size and weight of the boxes that make up your 
+order.</p><h3>Step 4:</h3><p>Click “Next” and complete the "Family Contact Information" screen; 
+read and acknowledge our Terms and Conditions and then click "Send 
+Order". A copy of your order will be e-mailed to you immediately for 
+your records.</p><p><b>Please note:</b> The submission of an order online, is in no way binding on you!</p><h3>Step 5:</h3><p>On receipt of your online order, Love2Learn will compile a Proforma 
+Invoice (Quotation) which will be e-mailed to you within 24 – 72 hours 
+for your consideration, together with a “Reference Number” and “link” to
+ our secure online payment portal.</p><p><b>Please note</b> that the pricing on our Online Order Form is 
+indicative only and that there may be a slight variation in the Proforma
+ Invoice pricing as a result of the constant fluctuation in the Rand – 
+Dollar Exchange Rate.</p><p>The Proforma Invoice that we send you will reflect the most current pricing and will be valid for a period of 5 days.</p><h3>Step 6:</h3><p>Should you wish to accept this Proforma Invoice, you can then click 
+on the “link” in the covering e-mail that accompanies your Proforma 
+Invoice and make your payment.<br>
+Our secure online payment portal offers the following payment options:</p><p>    Credit Card payments (MasterCard or Visa)<br>
+    Electronic Funds Transfer (EFT) payments<br>
+    Direct Deposit</p><p>Your order becomes official and binding only once we receive your payment.</p><h3>Step 7:</h3><p>Please forward your confirmation of payment either via email to <a href="mailto:info@love2learn.co.za">info@love2learn.co.za</a>, or via fax to 086 511 8407 (South Africa only).<br>
+Please note: Your order will only be processed once payment in full has been received.</p><p>Once your payment has been received by the Love2Learn office, you 
+will receive an e-mail, acknowledging receipt of your payment and 
+advising you that processing of your order has commenced.<br>
+If you are placing an order for the first time with Love2Learn, you will
+ also simultaneously receive our electronically supplied Complimentary 
+Love2Learn Bridging Programme. This means you can effectively begin 
+home-schooling immediately.<a href="https://love2learn.co.za/content/www.love2learn.co.za/linkeddocs/BridgingProgrammeOverview.pdf" target="_blank">CLICK HERE</a> for more information about our BRIDGING PROGRAMME.</p>
+<p><b>PLEASE NOTE: </b>Due to the fact that Love2Learn imports from 
+numerous suppliers worldwide; your order will take approximately eight 
+weeks to fulfil. We will notify you when it is complete and ready for 
+dispatch.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-close pull-left" data-dismiss="modal" aria-hidden="true">I HAVE READ THIS</button>
+  </div>
+</div>

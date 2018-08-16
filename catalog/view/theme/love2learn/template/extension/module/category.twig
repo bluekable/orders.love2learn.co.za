@@ -1,0 +1,128 @@
+<div class="accordion" id="categories-accordion">
+  {% for category in categories %}
+  {% if category.category_id == category_id %}
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <h3>
+          <a class="accordion-toggle list-group-item parent-category" data-toggle="collapse" data-parent="#categories-accordion" href="#collapse{{ category.category_id }}">{{ category.name }}</a>
+      </h3>
+    </div>
+    <div id="collapse{{ category.category_id }}" class="accordion-body collapse in">
+      <div class="accordion-inner">
+        {% if category.children %}
+          <div class="accordion" id="child-accordion">
+            {% for child in category.children %}
+            {% if child.category_id == child_id %}
+              {% if child.second_children %}
+                <div class="accordion-group">
+                  <div class="accordion-heading">
+                    <h2>
+                        <a class="accordion-toggle list-group-item child-category" data-toggle="collapse" data-parent="#child-accordion" href="#collapse{{ child.category_id }}">{{ child.name }}</a>
+                    </h2>
+                  </div>
+                  <div id="collapse{{ child.category_id }}" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                      {% for second_child in child.second_children %}
+                        {% if second_child.category_id == child_id %}
+                          <a href="{{ second_child.href }}" class="list-group-item second-child-category active">{{ second_child.name }}</a>
+                        {% else %} 
+                          <a href="{{ second_child.href }}" class="list-group-item second-child-category">{{ second_child.name }}</a>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% else %}
+              {% if child.second_children %}               
+                <div class="accordion-group">
+                  <div class="accordion-heading">
+                    <h2>
+                        <a class="accordion-toggle list-group-item child-category" data-toggle="collapse" data-parent="#child-accordion" href="#collapse{{ child.category_id }}">{{ child.name }}</a>
+                    </h2>
+                  </div>
+                  <div id="collapse{{ child.category_id }}" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                      {% for second_child in child.second_children %}
+                        {% if second_child.category_id == child_id %}
+                          <a href="{{ second_child.href }}" class="list-group-item second-child-category active">{{ second_child.name }}</a>
+                        {% else %} 
+                          <a href="{{ second_child.href }}" class="list-group-item second-child-category">{{ second_child.name }}</a>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <h3>
+          <a class="accordion-toggle list-group-item parent-category" data-toggle="collapse" data-parent="#categories-accordion" href="#collapse{{ category.category_id }}">{{ category.name }}</a>
+      </h3>
+    </div>
+    <div id="collapse{{ category.category_id }}" class="accordion-body collapse">
+      <div class="accordion-inner">
+        {% if category.children %}
+          <div class="accordion" id="child-accordion">
+            {% for child in category.children %}
+            {% if child.category_id == child_id %}
+              {% if child.second_children %}
+                <div class="accordion-group">
+                  <div class="accordion-heading">
+                    <h2>
+                        <a class="accordion-toggle list-group-item child-category" data-toggle="collapse" data-parent="#child-accordion" href="#collapse{{ child.category_id }}">{{ child.name }}</a>
+                    </h2>
+                  </div>
+                  <div id="collapse{{ category.category_id }}" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                      {% for second_child in child.second_children %}
+                        {% if second_child.category_id == child_id %}
+                          <a href="{{ second_child.href }}" class="list-group-item second-child-category active">{{ second_child.name }}</a>
+                        {% else %} 
+                          <a href="{{ second_child.href }}" class="list-group-item second-child-category">{{ second_child.name }}</a>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% else %}
+              {% if child.second_children %}
+                <div class="accordion-group">
+                  <div class="accordion-heading">
+                    <h2>
+                        <a class="accordion-toggle list-group-item child-category" data-toggle="collapse" data-parent="#child-accordion" href="#collapse{{ child.category_id }}">{{ child.name }}</a>
+                    </h2>
+                  </div>
+                  <div id="collapse{{ child.category_id }}" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                      {% for second_child in child.second_children %}
+                        {% if second_child.category_id == child_id %}
+                          <a href="{{ second_child.href }}" class="list-group-item second-child-category active">{{ second_child.name }}</a>
+                        {% else %} 
+                          <a href="{{ second_child.href }}" class="list-group-item second-child-category">{{ second_child.name }}</a>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
+

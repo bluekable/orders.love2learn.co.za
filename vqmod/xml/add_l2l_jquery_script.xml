@@ -1,0 +1,13 @@
+<!-- Created using vQmod XML Generator by UKSB - http://uksb.github.com/vqgen/ //-->
+<modification>
+	<id><![CDATA[Add L2L custom jQuery script]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.6.2]]></vqmver>
+	<author><![CDATA[Shane Drower-Copley]]></author>
+	<file path="/catalog/controller/common/" name="footer.php">
+		<operation info="Add a script to the footer for custom jQuery functions added for the Love2Learn Theme">
+			<search position="before"><![CDATA[$data['scripts'] = $this->document->getScripts('footer');]]></search>
+			<add><![CDATA[$this->document->addScript('catalog/view/javascript/l2l.js', 'footer');]]></add>
+		</operation>
+	</file>
+</modification>

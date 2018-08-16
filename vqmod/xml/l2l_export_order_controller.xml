@@ -1,0 +1,173 @@
+<!-- Created using vQmod XML Generator by UKSB - http://uksb.github.com/vqgen/ //-->
+<modification>
+	<id><![CDATA[L2L Export Order Info]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.6.7]]></vqmver>
+	<author><![CDATA[Bluekable]]></author>
+	<file path="/admin/controller/sale/" name="order.php">
+		<operation info="Add export method to order controller">
+			<search position="before" offset="1"><![CDATA[	public function delete() {]]></search>
+			<add><![CDATA[	public function export() {
+		$this->load->language['sale/order'];
+
+		$this->exportCsv();
+	}
+
+	public function exportCsv() {
+		$this->load->model('sale/order');
+
+		$this->load->model('setting/setting');
+
+		$data['orders'] = array();
+
+		$orders = array();
+
+		if (isset($this->request->post['selected'])) {
+			$orders = $this->request->post['selected'];
+		} elseif (isset($this->request->get['order_id'])) {
+			$orders[] = $this->request->get['order_id'];
+		}
+
+		foreach ($orders as $order_id) {
+			$order_info = $this->model_sale_order->getOrder($order_id);
+
+			if ($order_info) {
+				
+				$this->load->model('tool/upload');
+
+				$product_data = array();
+
+				$products = $this->model_sale_order->getOrderProductsExport($order_id);
+
+				foreach ($products as $product) {
+
+					//The first value is an array of headers - thereafter each product is another array
+					$product_data[0] = array(
+						'heading1' => 'subjName',
+						'heading2' => 'subjId',
+						'heading3' => 'quantity'
+					);
+
+					$product_data[] = array(
+						'name'		=> $product['name'],
+						'sku'     => $product['sku'],
+						'quantity' => $product['quantity']
+					);
+				}
+
+				$data['orders'][] = array(
+					'client'	       => $order_info['lastname'] . '_' . $order_info['firstname'],
+					'order_id'		   => $order_info['order_id'],
+					'products'         => $product_data
+				);
+			}
+		}
+
+		$all_files = array();
+
+			//Create the Zip Archive
+		$today = date('dmY');  
+		$zip_name = 'Orders_'.$today.'.zip';
+		$zip = new ZipArchive();
+		if($zip->open($zip_name, ZipArchive::CREATE)!==TRUE){
+			exit("cannot open <$zip_name>\n");
+		}
+		
+		foreach ($data['orders'] as $order) {
+			
+			// Name the file
+			$order_file_name = $order['client'] . '_order-' . $order['order_id'] . '_' . $today . '.csv';
+			
+			//$all_files is used outside of the main loop to delete all files created in the process.
+			array_push($all_files, $order_file_name); 
+			
+			//Create, populate and add the file to the Zip Archive			
+			if(is_file($order_file_name)) {
+			unlink($order_file_name);
+			} 
+			$handle = fopen($order_file_name, "w");
+			
+			if($handle === FALSE){
+				echo "Failed to create the required file $order_file_name for download - contact administrator. (To go back to the website simply click the back button in your browser)";
+			exit;
+			}
+				
+			foreach($order['products'] as $fields){
+				fputcsv($handle, $fields);
+			}
+				
+			fclose($handle);
+			
+			$zip->addFile($order_file_name, $order_file_name);
+						
+		}
+		
+		//Close and save Zip
+		if($zip->close()!==TRUE){
+			exit("cannot close <$zip_name>\n");
+		}
+			
+		//Delete all 3 individual files
+		for ($index = 0; $index < count($all_files); $index++) {	 
+			
+			$file = $all_files[$index];
+		
+		if(is_file($file)) {
+			unlink($file);
+			}
+				
+		}
+				
+		//Stream Zip
+		header('Content-Type: application/zip');
+		header('Content-disposition: attachment; filename='.$zip_name);
+		header('Content-Length: ' . filesize($zip_name));
+		readfile($zip_name);
+
+			
+		//Delete Zip
+		if(is_file($zip_name)) {
+			unlink($zip_name);
+		}
+	}]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$data['delete'] = str_replace('&amp;', '&', $this->url->link('sale/order/delete', 'user_token=' . $this->session->data['user_token'] . $url, true));]]></search>
+			<add><![CDATA[		$data['export'] = $this->url->link('sale/order/exportCsv', 'user_token=' . $this->session->data['user_token'], true);]]></add>
+		</operation>
+	</file>
+	<file path="/admin/model/sale/" name="order.php">
+		<operation info="Add gerOrderProductsExport function to order model">
+			<search position="before" offset="1"><![CDATA[	public function getOrderOptions($order_id, $order_product_id) {]]></search>
+			<add><![CDATA[	public function getOrderProductsExport($order_id) {
+		$query = $this->db->query("SELECT " . DB_PREFIX . "order_product.order_id," . DB_PREFIX . "order_product.name, " . DB_PREFIX . "order_product.quantity, " . DB_PREFIX . "product.sku FROM " . DB_PREFIX . "order_product INNER JOIN " . DB_PREFIX . "product ON " . DB_PREFIX . "product.product_id = " . DB_PREFIX . "order_product.product_id WHERE order_id = '" . (int)$order_id . "'");
+
+		return $query->rows;
+	}]]></add>
+		</operation>
+	</file>
+	<file path="/admin/view/template/sale/" name="order_list.twig">
+		<operation info="Add button to template file on admin view">
+			<search position="after"><![CDATA[<button type="submit" id="button-invoice" form="form-order" formaction="{{ invoice }}" formtarget="_blank" data-toggle="tooltip" title="{{ button_invoice_print }}" class="btn btn-info"><i class="fa fa-print"></i></button>]]></search>
+			<add><![CDATA[      <button type="submit" id="button-export" form="form-order" formaction="{{ export }}" formtarget="_blank" data-toggle="tooltip" title="{{ button_orders_export }}" class="btn btn-info"><i class="fa fa-download"></i></button>]]></add>
+		</operation>
+		<operation info="Add export button to js functions in order view file - add 1">
+			<search position="replace"><![CDATA[	$('#button-shipping, #button-invoice').prop('disabled', true);]]></search>
+			<add><![CDATA[	$('#button-shipping, #button-invoice, #button-export').prop('disabled', true);]]></add>
+		</operation>
+		<operation info="Add export button to js functions in order view file - add 2">
+			<search position="replace"><![CDATA[		$('#button-invoice').prop('disabled', false);]]></search>
+			<add><![CDATA[		$('#button-invoice, #button-export').prop('disabled', false);]]></add>
+		</operation>
+		<operation info="Add export button to js functions in order view file - add 3">
+			<search position="replace"><![CDATA[$('#button-shipping, #button-invoice').on('click', function(e) {]]></search>
+			<add><![CDATA[$('#button-shipping, #button-invoice, #button-export').on('click', function(e) {]]></add>
+		</operation>
+	</file>
+	<file path="/admin/language/en-gb/" name="en-gb.php">
+		<operation info="Add order export text to language file">
+			<search position="after"><![CDATA[$_['button_shipping_print']         = 'Print Shipping List';]]></search>
+			<add><![CDATA[$_['button_orders_export']          = 'Export Selected Orders to CSV';]]></add>
+		</operation>
+	</file>
+</modification>

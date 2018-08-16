@@ -1,0 +1,13 @@
+<!-- Created using vQmod XML Generator by UKSB - http://uksb.github.com/vqgen/ //-->
+<modification>
+	<id><![CDATA[Edit PavPop-Up Close Button]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.6.2]]></vqmver>
+	<author><![CDATA[Shane Drower-Copley]]></author>
+		<file path="/catalog/language/en-gb/account/" name="success.php">
+		<operation info="Change text displayed after client registers and account">
+			<search position="replace"><![CDATA[$_['text_message']  = '<p>Congratulations! Your new account has been successfully created!</p> <p>You can now take advantage of member privileges to enhance your online shopping experience with us.</p> <p>If you have ANY questions about the operation of this online shop, please e-mail the store owner.</p> <p>A confirmation has been sent to the provided e-mail address. If you have not received it within the hour, please <a href="%s">contact us</a>.</p>';]]></search>
+			<add><![CDATA[$_['text_message']  = '<p>Congratulations! Your new L2L account has been successfully created!</p> <p>You can now send us orders in order to get a pro-forma (free) quote.</p> <p>If you have ANY questions about the operation of this site, please <a href="mailto:techsupport@love2learn.co.za">email tech support</a>.</p> <p>A confirmation of your registration has been sent to your provided e-mail address. If you have not received it within the hour, please <a href="https://love2learn.co.za/contact-us">contact us</a>.</p>';]]></add>
+		</operation>
+	</file>
+</modification>
