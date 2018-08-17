@@ -412,6 +412,14 @@ class ControllerCheckoutConfirm extends Controller {
 			$data['redirect'] = $redirect;
 		}
 
+		$data['orderTotal'] = $this->cart->getTotal();
+		
+		if (isset($this->session->data['order_id'])) {
+			$data['orderID'] = $this->session->data['order_id'];
+		} else {
+			$data['orderID'] = "not set";
+		}
+
 		$this->response->setOutput($this->load->view('checkout/confirm', $data));
 	}
 }
