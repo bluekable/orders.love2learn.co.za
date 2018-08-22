@@ -8,10 +8,8 @@ $('#button-confirm').on('click', function() {
 
 	//Google GTM data	
 		dataLayer.push({
-     'orderid': $('#gtm-variables').data('id'),
-     'conversionValue': $('#gtm-variables').data('total')});
-
-		 console.log(dataLayer);
+     'transactionId': $('#gtm-variables').data('id'),
+     'transactionTotal': $('#gtm-variables').data('total')});
 	//End Google GTM data
 
 	$.ajax({
