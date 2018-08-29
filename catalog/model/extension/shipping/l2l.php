@@ -18,7 +18,7 @@ class ModelExtensionShippingL2l extends Model {
 		if ($status) {
 			$shippingCost = 0;
 			$subTotal = $this->cart->getSubTotal();
-			$shippingCost = $subTotal * 0.05;
+			$shippingCost = ($subTotal * 0.05) * 1.15;
 			
 			switch ($shippingCost){
 			case $shippingCost < 180;
