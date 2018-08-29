@@ -22,10 +22,10 @@ class ModelExtensionShippingL2l extends Model {
 			
 			switch ($shippingCost){
 			case $shippingCost < 180;
-				$shippingCost = 180;
+				$shippingCost = 180 * 1.15;
 				break;
 			case $shippingCost > 700;
-				$shippingCost = 700;
+				$shippingCost = 700 * 1.15;
 				break;
 			default:
 				break;
