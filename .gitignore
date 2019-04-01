@@ -3,6 +3,9 @@
 /config.php
 admin/config.php
 
+orders.love2learn.test.crt
+orders.love2learn.test.key
+
 *.DS_Store
 
 download/
