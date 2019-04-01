@@ -1,0 +1,13 @@
+<!-- Created using vQmod XML Generator by UKSB - http://uksb.github.com/vqgen/ //-->
+<modification>
+	<id><![CDATA[Accept URL for add to cart]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.6.7]]></vqmver>
+	<author><![CDATA[Bluekable]]></author>
+	<file path="/catalog/controller/checkout/" name="cart.php">
+		<operation info="Add languge data for heading on cart page">
+			<search position="after"><![CDATA[		$this->document->setTitle($this->language->get('heading_title'));]]></search>
+			<add><![CDATA[		$data['heading_title'] = $this->language->get('heading_title');]]></add>
+		</operation>
+	</file>
+</modification>
