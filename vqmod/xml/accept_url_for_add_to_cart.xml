@@ -1,0 +1,31 @@
+<!-- Created using vQmod XML Generator by UKSB - http://uksb.github.com/vqgen/ //-->
+<modification>
+	<id><![CDATA[Accept URL for add to cart]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.6.7]]></vqmver>
+	<author><![CDATA[Bluekable]]></author>
+	<file path="/catalog/controller/checkout/" name="cart.php">
+		<operation info="Add variation that will accept GET method url for adding multiple products to cart">
+			<search position="replace" offset="1"><![CDATA[public function add() {]]></search>
+			<add><![CDATA[public function add() {
+		$this->load->language('checkout/cart');
+
+		if ($this->request->server['REQUEST_METHOD'] == 'GET' && isset($this->request->get['product_ids'])) {
+			
+		$product_ids = $this->request->get['product_ids'];
+		$quantity = 1;
+		
+		unset($this->session->data['shipping_methods']);
+		unset($this->session->data['shipping_method']);
+		unset($this->session->data['payment_methods']);
+		unset($this->session->data['payment_method']);
+		
+		foreach( $product_ids as $product_id) {
+			$this->cart->add($product_id, $quantity);
+		}
+		
+		$this->response->redirect($this->url->link('checkout/cart'));
+		}]]></add>
+		</operation>
+	</file>
+</modification>
