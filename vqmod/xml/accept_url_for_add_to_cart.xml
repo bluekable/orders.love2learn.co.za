@@ -13,7 +13,19 @@
 		if ($this->request->server['REQUEST_METHOD'] == 'GET' && isset($this->request->get['product_ids'])) {
 			
 		$product_ids = $this->request->get['product_ids'];
-		$quantity = 1;
+		$quantity = $this->request->get['qty'];
+
+		$count = count($product_ids);
+		$products = array();
+
+		for ($i = 0; $i < $count; $i++) {
+			$product = array(
+				'id' => $product_ids[$i],
+				'qty' => $quantity[$i]
+			);
+
+			$products[$i] = $product;
+		}
 		
 		unset($this->session->data['shipping_methods']);
 		unset($this->session->data['shipping_method']);
