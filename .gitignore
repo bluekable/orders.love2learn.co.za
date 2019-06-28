@@ -1,7 +1,10 @@
 .htaccess
 
+/hetzner-catalog-config.php
 /config.php
 admin/config.php
+admin/hetzner-admin-config.php
+
 
 orders.love2learn.test.crt
 orders.love2learn.test.key
@@ -27,6 +30,3 @@ vqmod/mods.cache
 orders.love2learn.crt
 orders.love2learn.key
 php.ini
-
-hetzner-catalog-config.php
-admin/hetzner-admin-config.php
