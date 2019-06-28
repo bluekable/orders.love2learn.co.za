@@ -27,3 +27,6 @@ vqmod/mods.cache
 orders.love2learn.crt
 orders.love2learn.key
 php.ini
+
+hetzner-catalog-config.php
+admin/hetzner-admin-config.php
